@@ -103,7 +103,7 @@ def check_and_notify(new_courses, old_courses):
         if key not in old_set:
             grade = c['最终'].strip()
             gp = c['绩点'].strip()
-            if grade in ['A', 'A-']:
+            if grade in ['A', 'A-', 'A+']:
                 send_message('Good News', f"课程 {c['课程名称']} 成绩为 {grade} / 绩点 {gp}")
             elif grade == 'B+':
                 send_message('Bad News', f"课程 {c['课程名称']} 成绩为 {grade} / 绩点 {gp}")
