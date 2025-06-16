@@ -123,16 +123,6 @@ def main():
                 check_and_notify(new_courses, old_courses)
             old_courses = new_courses
             last_hash = current_hash
-            for c in new_courses:
-                key = (c['课程代码'], c['课程序号'])
-                grade = c['最终'].strip()
-                gp = c['绩点'].strip()
-                if grade in ['A', 'A-']:
-                    send_message('Good News', f"课程 {c['课程名称']} 成绩为 {grade} / 绩点 {gp}")
-                elif grade == 'B+':
-                    send_message('Bad News', f"课程 {c['课程名称']} 成绩为 {grade} / 绩点 {gp}")
-                elif grade in ['B', 'B-', 'C+', 'C', 'C-', 'D+', 'D-', 'F']:
-                    send_message('terrible news', f"课程 {c['课程名称']} 成绩为 {grade} / 绩点 {gp}")
         except Exception as e:
             send_message('成绩监控异常', f'发生异常: {e}')
         time.sleep(CHECK_INTERVAL)
