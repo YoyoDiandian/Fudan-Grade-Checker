@@ -41,13 +41,13 @@ pip install requests beautifulsoup4 python-dotenv
 USERNAME=2230xxx0abc
 PASSWORD=123456
 PUSHPLUS_TOKEN=aaaaaaaaaaaaaa
-CHECK_INTERVAL=600
+CHECK_INTERVAL=300
 ```
 
 - `USERNAME`：复旦大学统一身份认证学号
 - `PASSWORD`：统一身份认证密码
 - `PUSHPLUS_TOKEN`：PushPlus 推送 token（[获取方法](https://www.pushplus.plus/)）
-- `CHECK_INTERVAL`：成绩检查间隔，单位为秒，默认为 600 秒（10 分钟）
+- `CHECK_INTERVAL`：成绩检查间隔，单位为秒，默认为 300 秒（5 分钟）
 
 ### 4. 运行脚本
 
