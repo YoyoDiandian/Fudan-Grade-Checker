@@ -33,9 +33,7 @@ pip install requests beautifulsoup4 python-dotenv
 
 ### 3. 配置环境变量
 
-在项目根目录下新建 `.env` 文件，内容如下：
-
-示例：
+在项目根目录下修改 `.env` 文件，内容如示例：
 
 ```
 USERNAME=2230xxx0abc
