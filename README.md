@@ -1,6 +1,6 @@
-# FDU-Grade-Checker
+# Fudan-Grade-Checker
 
-FDU-Grade-Checker 是一个自动监控复旦大学教务系统成绩变动并通过 PushPlus 微信推送通知的脚本。
+Fudan-Grade-Checker 是一个自动监控复旦大学教务系统成绩变动并通过 PushPlus 微信推送通知的脚本。
 
 ## 功能简介
 - 自动登录复旦大学教务系统
