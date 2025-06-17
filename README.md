@@ -32,7 +32,7 @@ cd FDU-Grade-Checker
 ```
 
 **方式二：下载压缩包**
-在 GitHub 页面点击 `Code` → `Download ZIP`，下载后解压。
+在 GitHub 页面点击 `Code` → `Download ZIP`。
 ![](./figures/download%20zip.png)
 
 ### 2. 部署环境
