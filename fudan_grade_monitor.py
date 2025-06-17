@@ -4,6 +4,7 @@ import hashlib
 import time
 from dotenv import load_dotenv
 import os
+import json
 
 load_dotenv()
 USERNAME = os.getenv('USERNAME')
@@ -12,6 +13,7 @@ LOGIN_URL = "https://uis.fudan.edu.cn/authserver/login?service=http%3A%2F%2Fjwfw
 GRADE_URL = "https://jwfw.fudan.edu.cn/eams/teach/grade/course/person!search.action?semesterId=487&projectType=&projectId="
 CHECK_INTERVAL = int(os.getenv('CHECK_INTERVAL', '300'))
 PUSHPLUS_TOKEN = os.getenv('PUSHPLUS_TOKEN')
+OLD_COURSES_FILE = "old_courses.json"
 
 
 def send_message(title, content):
@@ -108,11 +110,33 @@ def check_and_notify(new_courses, old_courses):
             elif grade == 'B+':
                 send_message('Bad News', f"课程 {c['课程名称']} 成绩为 {grade} / 绩点 {gp}")
             elif grade in ['B', 'B-', 'C+', 'C', 'C-', 'D+', 'D-', 'F']:
-                send_message('terrible news', f"课程 {c['课程名称']} 成绩为 {grade} / 绩点 {gp}")
+                send_message('Terrible news', f"课程 {c['课程名称']} 成绩为 {grade} / 绩点 {gp}")
+            elif grade == 'P':
+                send_message('Pass', f"课程 {c['课程名称']} 成绩为 {grade}")
+            elif grade == 'NP':
+                send_message('Terrible news', f"课程 {c['课程名称']} 成绩为 {grade}")
+            else:
+                send_message('Unknown Grade', f"课程 {c['课程名称']} 成绩为 {grade} / 绩点 {gp}")
+
+def load_old_courses():
+    if not os.path.exists(OLD_COURSES_FILE):
+        return []
+    try:
+        with open(OLD_COURSES_FILE, "r", encoding="utf-8") as f:
+            return json.load(f)
+    except Exception:
+        return []
+
+def save_old_courses(courses):
+    try:
+        with open(OLD_COURSES_FILE, "w", encoding="utf-8") as f:
+            json.dump(courses, f, ensure_ascii=False, indent=2)
+    except Exception as e:
+        print(f"保存 old_courses 失败: {e}")
 
 def main():
     last_hash = None
-    old_courses = []
+    old_courses = load_old_courses()
     while True:
         try:
             html = login_and_get_grades()
@@ -121,10 +145,14 @@ def main():
             new_courses = parse_grades(grades_text)
             if last_hash and current_hash != last_hash:
                 check_and_notify(new_courses, old_courses)
+                print("检测到新成绩或成绩变化")
+            else:
+                print("没有新成绩或成绩未变化")
             old_courses = new_courses
+            save_old_courses(old_courses)
             last_hash = current_hash
         except Exception as e:
-            send_message('成绩监控异常', f'发生异常: {e}')
+            print(f"发生异常: {e}")
         time.sleep(CHECK_INTERVAL)
 
 if __name__ == '__main__':
