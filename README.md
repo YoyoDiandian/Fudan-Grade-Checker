@@ -27,8 +27,8 @@ Fudan-Grade-Checker 是一个自动监控复旦大学教务系统成绩变动并
 
 **方式一：使用 git 克隆**
 ```bash
-git clone https://github.com/yourusername/FDU-Grade-Checker.git
-cd FDU-Grade-Checker
+git clone https://github.com/YoyoDiandian/Fudan-Grade-Checker.git
+cd Fudan-Grade-Checker
 ```
 
 **方式二：下载压缩包**
@@ -41,7 +41,7 @@ cd FDU-Grade-Checker
 
 1. 登录 [AutoDL](https://www.autodl.com) 并扫码进入。
 2. 购买实例，选择任意配置，支付后默认开机。在`容器实例`中先关机。
-3. 在更多中点击“无卡模式开机”，等待状态变为“运行中”。
+3. 在"更多"中点击“无卡模式开机”，等待状态变为“运行中”。
    ![](./figures/无卡模式.png)
 4. 进入“JupyterLab”界面。
    ![](./figures/jupyter进入.png)
@@ -66,13 +66,13 @@ cd FDU-Grade-Checker
 在项目根目录下新建或编辑 `.env` 文件，内容如下：
 
 ```
-USERNAME=2230xxx0abc
+USERID=2230xxx0abc
 PASSWORD=123456
 PUSHPLUS_TOKEN=aaaaaaaaaaaaaa
 CHECK_INTERVAL=300
 ```
 
-- `USERNAME`：复旦大学统一身份认证学号
+- `USERID`：复旦大学统一身份认证学号
 - `PASSWORD`：统一身份认证密码
 - `PUSHPLUS_TOKEN`：PushPlus 推送 token（[获取方法](#5-pushplus获取方法)）
 - `CHECK_INTERVAL`：成绩检查间隔（秒），默认 300 秒（5 分钟）
@@ -80,7 +80,7 @@ CHECK_INTERVAL=300
 *小白指南：*
 可用如下命令创建 `.env` 文件：
 ```bash
-echo USERNAME=你的学号 > .env
+echo USERID=你的学号 > .env
 echo PASSWORD=你的密码 >> .env
 echo PUSHPLUS_TOKEN=你的推送token >> .env
 echo CHECK_INTERVAL=300 >> .env

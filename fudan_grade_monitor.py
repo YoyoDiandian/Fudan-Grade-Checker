@@ -7,7 +7,7 @@ import os
 import json
 
 load_dotenv()
-USERNAME = os.getenv('USERNAME')
+USERID = os.getenv('USERID')
 PASSWORD = os.getenv('PASSWORD')
 LOGIN_URL = "https://uis.fudan.edu.cn/authserver/login?service=http%3A%2F%2Fjwfw.fudan.edu.cn%2Feams%2Fhome.action"
 GRADE_URL = "https://jwfw.fudan.edu.cn/eams/teach/grade/course/person!search.action?semesterId=487&projectType=&projectId="
@@ -46,7 +46,7 @@ def login_and_get_grades():
     rmShown = soup.find('input', {'name': 'rmShown'})['value']
     # 2. 构造登录表单
     login_data = {
-        'username': USERNAME,
+        'username': USERID,
         'password': PASSWORD,
         'lt': lt,
         'dllt': dllt,
